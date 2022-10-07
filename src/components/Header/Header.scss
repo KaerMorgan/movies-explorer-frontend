@@ -1,0 +1,95 @@
+.header {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-on-background);
+
+  padding: 18px var(--width-padding);
+  margin: 0 auto;
+
+  &_type_intro {
+    background-color: var(--color-background-intro);
+  }
+
+  &__logo {
+    cursor: pointer;
+  }
+
+  &__navbar {
+    display: flex;
+    column-gap: 16px;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: var(--color-on-background);
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+
+    &_active {
+      font-weight: 500;
+    }
+
+    &_type-profile {
+      @extend .header__link;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+
+      display: flex;
+      column-gap: 8px;
+      align-items: center;
+    }
+  }
+
+  &__profile-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #313131;
+    border: none;
+    cursor: pointer;
+  }
+
+  &__button-group {
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+  }
+
+  &__register-button {
+    color: var(--color-on-background);
+    border: none;
+    background-color: transparent;
+
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+  }
+
+  &__login-button {
+    width: 76px;
+    height: 32px;
+    padding: 0;
+    background-color: var(--color-accent);
+    border-radius: 3px;
+    border: none;
+
+    color: var(--color-background);
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    cursor: pointer;
+  }
+}
