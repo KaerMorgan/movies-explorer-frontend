@@ -1,0 +1,55 @@
+.portfolio {
+  background-color: #202020;
+  padding-bottom: 125px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    row-gap: 20px;
+
+    &-header {
+      margin: 0 0 50px;
+      width: 100%;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 20px;
+      color: #8B8B8B;
+    }
+
+    &-item {
+      max-height: 69px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 0 19px;
+      border-bottom: 1px solid#424242;
+      align-items: center;
+    }
+
+    &-link {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 50px;
+      letter-spacing: -0.04em;
+      text-decoration: none;
+      color: var(--color-on-background);
+    }
+  }
+
+  &__arrow {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 60px;
+    letter-spacing: -0.04em;
+  }
+}

@@ -1,0 +1,42 @@
+.promo {
+  &__text-group {
+    max-width: 640px;
+  }
+
+  &__title {
+    margin: 0 0 36px;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    color: var(--color-on-background);
+  }
+
+  &__subtitle {
+    max-width: 310px;
+    margin: 0 0 146px;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    opacity: .5;
+    color: var(--color-on-background);
+  }
+
+  &__button {
+    width: 129px;
+    height: 36px;
+    font-family: var(--primary-font);
+    color: var(--color-on-background);
+    border: 1px solid rgba($color: #fff, $alpha: .6);
+    border-radius: 3px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}

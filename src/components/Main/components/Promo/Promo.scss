@@ -1,0 +1,15 @@
+.promo {
+  padding-top: 75px;
+  padding-bottom: 75px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: var(--color-background-intro);
+
+  &__image {
+    height: 304px;
+    width: 310px;
+  }
+}

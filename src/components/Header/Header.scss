@@ -1,9 +1,11 @@
 .header {
   max-width: 100%;
+  background-color: var(--color-background-variant);
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: var(--color-on-background);
+  font-family: var(--primary-font);
 
   padding: 18px var(--width-padding);
   margin: 0 auto;
@@ -24,7 +26,6 @@
   &__link {
     text-decoration: none;
     color: var(--color-on-background);
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
     font-size: 13px;
@@ -36,7 +37,6 @@
 
     &_type-profile {
       @extend .header__link;
-      font-family: 'Inter';
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
@@ -64,6 +64,7 @@
   }
 
   &__register-button {
+    padding: 0;
     color: var(--color-on-background);
     border: none;
     background-color: transparent;

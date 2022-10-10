@@ -1,0 +1,30 @@
+.card-list {
+  max-width: 100%;
+  padding: 80px var(--width-padding);
+  background-color: var(--color-background-variant);
+
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+
+  &__button {
+    height: 36px;
+    width: 1140px;
+    background: #2F2F2F;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: var(--color-on-background);
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+}

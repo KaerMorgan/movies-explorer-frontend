@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
 import profileImage from '../../images/profile-image.png';
+import cn from 'classnames';
 import './Header.scss';
 
 const Header = () => {
-  const isLogged = false;
+  const isLogged = true;
 
   return (
-    <header className='header header_type_intro'>
+    <header className={cn('header', { header_type_intro: !isLogged })}>
       <img src={logo} alt='Логотип' className='header__logo' />
       {isLogged ? (
         <>
