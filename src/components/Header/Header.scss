@@ -1,6 +1,5 @@
 .header {
   max-width: 100%;
-  background-color: var(--color-background-variant);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,7 +84,7 @@
     border-radius: 3px;
     border: none;
 
-    color: var(--color-background);
+    color: #000;
     font-family: var(--primary-font);
     font-style: normal;
     font-weight: 500;

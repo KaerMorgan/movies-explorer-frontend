@@ -1,4 +1,4 @@
-import search from '../../../../images/search-button.png';
+import search from '../../images/search-button.png';
 import './SearchForm.scss';
 
 const SearchForm = () => {

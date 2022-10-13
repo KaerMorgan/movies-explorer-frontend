@@ -1,0 +1,126 @@
+.register {
+  padding: 70px 0;
+  margin: 0 auto;
+  max-width: 396px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  &__logo {
+    height: 38px;
+    width: 38px;
+    margin: 0 0 40px;
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  &__title {
+    width: 100%;
+    margin: 0 0 40px;
+    font-family: var(--primary-font);
+    color: var(--color-on-background);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 29px;
+  }
+
+  &__input-label {
+    width: 100%;
+    margin: 0 0 20px;
+
+    &:last-of-type {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__input-caption {
+    margin: 0 0 10px;
+    font-family: var(--primary-font);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    color: #8B8B8B;
+  }
+
+  &__input {
+    padding: 15px;
+    height: 46px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #2F2F2F;
+    border: none;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-on-background);
+
+  }
+
+  &__error {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin: 0 0 69px;
+  }
+
+  &__bottom-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__submit {
+    margin: 0 auto 16px;
+    width: 100%;
+    height: 45px;
+    background-color: #4285F4;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #FFFFFF;
+
+  }
+
+  &__caption {
+    margin: 0;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #8B8B8B;
+  }
+
+  &__link {
+    margin: 0 0 0 6px;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #4285F4;
+
+  }
+}
