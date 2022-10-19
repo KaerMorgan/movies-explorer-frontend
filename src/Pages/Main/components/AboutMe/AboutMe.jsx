@@ -5,7 +5,7 @@ const AboutMe = () => {
   return (
     <section className='main__section about-me'>
       <h2 className='main__section-title'>Студент</h2>
-      <hr className='main__line-break about-me__line-break' />
+      <hr className='about-me__line-break' />
 
       <div className='about-me__text-group'>
         <h3 className='about-me__title'>Данил</h3>

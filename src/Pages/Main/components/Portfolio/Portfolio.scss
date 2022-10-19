@@ -26,22 +26,23 @@
 
     &-item {
       max-height: 69px;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       padding: 0 0 19px;
       border-bottom: 1px solid#424242;
-      align-items: center;
     }
 
     &-link {
       font-style: normal;
       font-weight: 400;
       font-size: 30px;
+      max-height: 100%;
       line-height: 50px;
       letter-spacing: -0.04em;
       text-decoration: none;
       color: var(--color-on-background);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
   }
 

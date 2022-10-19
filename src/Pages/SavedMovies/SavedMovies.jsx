@@ -9,7 +9,7 @@ const SavedMovies = () => {
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={true} />
       <SearchForm />
       {/* {isLoading ? (
       <Preloader />

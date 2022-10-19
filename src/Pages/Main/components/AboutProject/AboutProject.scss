@@ -54,11 +54,12 @@
     width: 228px;
     height: 36px;
     background-color: #3DDC84;
+    color: #000;
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin: 0 0 26px;
+    margin: 0 0 14px;
   }
 
   &__front-end-bar {
@@ -69,6 +70,15 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin: 0 0 26px;
+    margin: 0 0 14px;
+  }
+
+  &__caption {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #8B8B8B;
   }
 }

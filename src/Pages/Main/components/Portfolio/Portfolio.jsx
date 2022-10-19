@@ -7,21 +7,21 @@ const Portfolio = () => {
       <ul className='portfolio__list'>
         <li className='portfolio__list-item'>
           <a href='https://github.com/KaerMorgan/how-to-learn' className='portfolio__list-link'>
-            Статичный сайт
+            <p>Статичный сайт</p>
+            <p className='portfolio__arrow'>↗</p>
           </a>
-          <p className='portfolio__arrow'>↗</p>
         </li>
         <li className='portfolio__list-item'>
           <a href='https://github.com/KaerMorgan/russian-travel' className='portfolio__list-link'>
-            Адаптивный сайт
+            <p>Адаптивный сайт</p>
+            <p className='portfolio__arrow'>↗</p>
           </a>
-          <p className='portfolio__arrow'>↗</p>
         </li>
         <li className='portfolio__list-item'>
           <a href='https://github.com/KaerMorgan/mesto-react' className='portfolio__list-link'>
-            Одностраничное приложение
+            <p>Одностраничное приложение</p>
+            <p className='portfolio__arrow'>↗</p>
           </a>
-          <p className='portfolio__arrow'>↗</p>
         </li>
       </ul>
     </section>

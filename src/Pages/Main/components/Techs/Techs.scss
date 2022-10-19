@@ -5,6 +5,12 @@
 
   &__line-break {
     margin: 0 auto 90px;
+
+    padding: 0;
+    height: 1px;
+    background: #DADADA;
+    width: 1140px;
+    border: none;
   }
 
   &__title {
@@ -46,6 +52,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: var(--primary-font);
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      text-align: center;
+      letter-spacing: -0.04em;
+      color: var(--color-on-background);
     }
   }
 }

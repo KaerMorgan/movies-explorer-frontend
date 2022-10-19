@@ -4,7 +4,7 @@ const Techs = () => {
   return (
     <section className='main__section techs'>
       <h2 className='main__section-title'>Технологии</h2>
-      <hr className='main__line-break techs__line-break' />
+      <hr className='techs__line-break' />
       <h3 className='techs__title'>7 технологий</h3>
       <p className='techs__text'>
         На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.

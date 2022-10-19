@@ -6,7 +6,13 @@
   flex-wrap: wrap;
 
   &__line-break {
-    margin-bottom: 66px;
+    margin: 0 auto 66px;
+
+    padding: 0;
+    height: 1px;
+    background: #DADADA;
+    width: 1140px;
+    border: none;
   }
 
   &__text-group {

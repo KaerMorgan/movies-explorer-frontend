@@ -45,6 +45,10 @@
       column-gap: 8px;
       align-items: center;
     }
+
+    &:hover {
+      opacity: .8;
+    }
   }
 
   &__profile-button {
@@ -74,6 +78,10 @@
     font-size: 12px;
     line-height: 16px;
     cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
   }
 
   &__login-button {
@@ -91,5 +99,9 @@
     font-size: 12px;
     line-height: 16px;
     cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
   }
 }

@@ -38,6 +38,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
   }
 
   &__switch-group {
@@ -57,11 +62,17 @@
     font-size: 14px;
     line-height: 18px;
     color: var(--color-on-background);
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
   }
 
   // сгенерированные стили мне очень не понравились так как они едва различимы,
   // поэтому я поменял background-color чекбокса на тот же что использует input выше
   &__switch {
+    cursor: pointer;
     position: relative;
     appearance: none;
     outline: none;

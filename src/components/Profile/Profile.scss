@@ -10,6 +10,14 @@
   &__title {
     margin: 0 auto 123px;
     color: var(--color-on-background);
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 29px;
+
+    text-align: center;
+
   }
 
   &__info {
@@ -20,26 +28,39 @@
     margin: 0 auto 220px;
   }
 
-  &__text-group {
+  &__input-group {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     p {
       margin: 0;
       height: 14px;
       font-family: var(--primary-font);
       font-style: normal;
-      font-weight: 400;
+      font-weight: 500;
       font-size: 11px;
       line-height: 13px;
       color: var(--color-on-background);
-
-
     }
+  }
 
-    .profile__name,
-    .profile__email {
-      font-weight: 500;
+  &__input {
+    border: none;
+    width: 90%;
+    background-color: transparent;
+    margin: 0;
+    height: 14px;
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: var(--color-on-background);
+    text-align: right;
+
+    &:focus {
+      outline: none;
     }
   }
 
@@ -58,7 +79,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    margin: 0 auto 16px;
+    margin: 33px auto 16px;
 
     font-family: var(--primary-font);
     font-style: normal;
@@ -67,10 +88,41 @@
     line-height: 16px;
     color: var(--color-on-background);
 
+    &:hover {
+      opacity: .8;
+    }
+
     &:last-of-type {
       color: #EE3465;
       font-weight: 500;
-      margin: 0;
+      margin: 0 auto;
     }
+  }
+
+  &__submit {
+    margin: 0 auto 9px;
+    width: 410px;
+    height: 45px;
+    background: #3456F3;
+    border-radius: 3px;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &:disabled {
+      background-color: #f8f8f8;
+    }
+  }
+
+  &__error {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #FF004C;
+    text-align: center;
+    margin: 0 auto 20px;
   }
 }

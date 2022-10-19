@@ -1,31 +1,76 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
 import './Profile.scss';
-const Profile = () => {
-  const user = {
-    name: 'Данил',
-    email: 'subdante@gmail.com',
-  };
 
-  const editMode = false;
+const Profile = () => {
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState('Данил');
+  const [email, setEmail] = useState('subdante@gmail.com');
+  const errors = false;
 
   return (
     <>
-      <Header />
+      <Header isLoggedIn={true} />
       <main className='profile'>
-        <h1 className='profile__title'>{`Привет, ${user.name}`}</h1>
-        <div className='profile__info'>
-          <div className='profile__text-group'>
-            <p className='profile__name'>Имя</p>
-            <p>user.name</p>
+        <h1 className='profile__title'>{`Привет, ${name}!`}</h1>
+        <form>
+          <div className='profile__info'>
+            <label className='profile__input-group'>
+              <p className='profile__name'>Имя</p>
+              {isEditMode ? (
+                <input className='profile__input' value={name} />
+              ) : (
+                <div className='profile__input'>{name}</div>
+              )}
+            </label>
+            <hr className='profile__line-break' />
+            <label className='profile__input-group'>
+              <p className='profile__email'>E-mail</p>
+              {isEditMode ? (
+                <input className='profile__input' value={email} />
+              ) : (
+                <div className='profile__input'>{email}</div>
+              )}
+            </label>
           </div>
-          <hr className='profile__line-break' />
-          <div className='profile__text-group'>
-            <p className='profile__email'>E-mail</p>
-            <p>user.email</p>
-          </div>
-        </div>
-        <button className='profile__button'>Редактировать</button>
-        <button className='profile__button'>Выйти из аккаунта</button>
+          {!isEditMode ? (
+            <>
+              <button
+                className='profile__button'
+                onClick={() => {
+                  setIsEditMode(true);
+                }}
+              >
+                Редактировать
+              </button>
+              <button
+                className='profile__button'
+                onClick={() => {
+                  navigate('/signin');
+                }}
+              >
+                Выйти из аккаунта
+              </button>
+            </>
+          ) : (
+            <>
+              {errors && <p className='profile__error'>При обновлении профиля произошла ошибка.</p>}
+              <button
+                className='profile__submit'
+                disabled={errors}
+                onClick={() => {
+                  setIsEditMode(false);
+                }}
+              >
+                Сохранить
+              </button>
+            </>
+          )}
+        </form>
       </main>
     </>
   );

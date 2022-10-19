@@ -74,7 +74,7 @@
 }
 
 @mixin media-laptop {
-  @media (max-width: 1139px) {
+  @media (max-width: 1279px) {
     @content;
   }
 }

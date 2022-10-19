@@ -3,7 +3,7 @@ import logo from '../../images/logo.png';
 import './Register.scss';
 
 const Register = () => {
-  const error = true;
+  const error = false;
 
   return (
     <main className='register'>
@@ -27,7 +27,7 @@ const Register = () => {
           <button className='register__submit'>Зарегистрироваться</button>
           <p className='register__caption'>
             Уже зарегистрированы?
-            <Link to='signin' className='register__link'>
+            <Link className='register__link' to='/signin' replace>
               Войти
             </Link>
           </p>

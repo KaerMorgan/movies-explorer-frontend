@@ -1,8 +1,8 @@
-import './MoviesCard.scss';
 import filler from '../../images/filler.png';
 import like from '../../images/like.png';
 import liked from '../../images/liked.png';
 import cross from '../../images/cross.png';
+import './MoviesCard.scss';
 
 const MoviesCard = ({ data = {}, saved = false }) => {
   const { name, image, duration } = data;

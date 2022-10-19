@@ -14,7 +14,9 @@ const SearchForm = () => {
 
       <div className='search-form__switch-group'>
         <input type='checkbox' name='toggle-switch' className='search-form__switch' id='toggle' />
-        <p className='search-form__switch-caption'>Короткометражки</p>
+        <label htmlFor='toggle' className='search-form__switch-caption'>
+          Короткометражки
+        </label>
       </div>
     </section>
   );

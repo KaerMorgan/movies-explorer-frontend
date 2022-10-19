@@ -25,12 +25,12 @@ const AboutProject = () => {
       <div className='about-project__progress-bar'>
         <div className='about-project__back-end-group'>
           <div className='about-project__back-end-bar'>1 неделя</div>
-          <div className='about-project__back-end-caption'>Back-end</div>
+          <div className='about-project__caption'>Back-end</div>
         </div>
 
         <div className='about-project__front-end-group'>
           <div className='about-project__front-end-bar'>4 недели</div>
-          <div className='about-project__front-end-caption'>Front-end</div>
+          <div className='about-project__caption'>Front-end</div>
         </div>
       </div>
     </section>
