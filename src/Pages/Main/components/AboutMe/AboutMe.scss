@@ -1,6 +1,8 @@
+@import "variables";
+
 .about-me {
   background-color: #202020;
-  padding-top: 110px;
+  padding: 110px var(--width-padding) 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -11,7 +13,7 @@
     padding: 0;
     height: 1px;
     background: #DADADA;
-    width: 1140px;
+    width: 100%;
     border: none;
   }
 
@@ -19,7 +21,12 @@
     display: flex;
     flex-direction: column;
     max-width: 600px;
-    margin-bottom: 101px;
+
+
+    @include media-laptop {
+      max-width: 55%;
+      max-height: 307px;
+    }
   }
 
   &__title {
@@ -29,6 +36,12 @@
     font-size: 50px;
     line-height: 58px;
     letter-spacing: -0.04em;
+
+    @include media-laptop {
+      margin: 0 0 16px;
+      font-size: 40px;
+      line-height: 40px;
+    }
   }
 
   &__subtitle {
@@ -37,6 +50,12 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
+
+    @include media-laptop {
+      margin: 0 0 20px;
+      font-size: 12px;
+      line-height: 18px;
+    }
   }
 
   &__text {
@@ -45,6 +64,12 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
+
+    @include media-laptop {
+      margin: 0 0 auto;
+      font-size: 12px;
+      line-height: 18px;
+    }
   }
 
   &__link {
@@ -63,5 +88,16 @@
     margin-left: auto;
     object-fit: cover;
     object-position: center;
+    margin: 0 0 100px auto;
+
+    @include media-laptop {
+      margin: 0 0 90px auto;
+      height: 307px;
+      width: 255px;
+    }
+  }
+
+  @include media-laptop {
+    padding: 90px 50px 0;
   }
 }

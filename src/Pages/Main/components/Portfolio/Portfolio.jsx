@@ -2,7 +2,7 @@ import './Portfolio.scss';
 
 const Portfolio = () => {
   return (
-    <section className='main__section portfolio'>
+    <section className='portfolio'>
       <p className='portfolio__list-header'>Портфолио</p>
       <ul className='portfolio__list'>
         <li className='portfolio__list-item'>

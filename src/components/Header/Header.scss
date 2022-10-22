@@ -1,3 +1,5 @@
+@import "variables";
+
 .header {
   max-width: 100%;
   display: flex;
@@ -20,6 +22,10 @@
   &__navbar {
     display: flex;
     column-gap: 16px;
+
+    @include media-laptop {
+      display: none;
+    }
   }
 
   &__link {
@@ -44,6 +50,10 @@
       display: flex;
       column-gap: 8px;
       align-items: center;
+
+      @include media-laptop {
+        display: none;
+      }
     }
 
     &:hover {
@@ -58,6 +68,22 @@
     background-color: #313131;
     border: none;
     cursor: pointer;
+  }
+
+  &__burger {
+    background-color: transparent;
+    height: 44px;
+    width: 44px;
+    border: none;
+    display: none;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    @include media-laptop {
+      display: block;
+    }
   }
 
   &__button-group {
@@ -103,5 +129,9 @@
     &:hover {
       opacity: .8;
     }
+  }
+
+  @include media-laptop {
+    padding: 18px 30px;
   }
 }

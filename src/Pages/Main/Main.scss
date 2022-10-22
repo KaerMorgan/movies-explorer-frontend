@@ -1,13 +1,9 @@
+@import "variables";
+
 .main {
   min-width: 100%;
   font-family: var(--primary-font);
   color: var(--color-on-background);
-
-  &__section {
-    max-width: 100%;
-    padding-left: var(--width-padding);
-    padding-right: var(--width-padding);
-  }
 
   &__section-title {
     margin: 0 0 23px;
@@ -20,12 +16,5 @@
     color: var(--color-on-background);
   }
 
-  &__line-break {
-    margin: 0 auto 70px;
-    padding: 0;
-    height: 1px;
-    background: #DADADA;
-    width: 1140px;
-    border: none;
-  }
+  @include media-laptop {}
 }

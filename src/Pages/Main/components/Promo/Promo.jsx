@@ -3,7 +3,7 @@ import './Promo.scss';
 
 const Promo = ({ children }) => {
   return (
-    <section className='main__section promo'>
+    <section className='promo'>
       {children}
       <img src={globe} alt="Планета из слова 'веб'" className='promo__image' />
     </section>

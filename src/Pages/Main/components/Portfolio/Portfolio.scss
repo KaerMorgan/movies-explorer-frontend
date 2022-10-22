@@ -1,6 +1,8 @@
+@import "variables";
+
 .portfolio {
   background-color: #202020;
-  padding-bottom: 125px;
+  padding: 0 var(--width-padding) 125px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -43,6 +45,10 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+
+      @include media-laptop {
+        font-size: 28px;
+      }
     }
   }
 
@@ -52,5 +58,9 @@
     font-size: 30px;
     line-height: 60px;
     letter-spacing: -0.04em;
+  }
+
+  @include media-laptop {
+    padding: 0 50px 90px;
   }
 }

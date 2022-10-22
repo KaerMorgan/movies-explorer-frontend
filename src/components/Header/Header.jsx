@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.png';
+import burger from '../../images/burger.png';
 import profileImage from '../../images/profile-image.png';
 import cn from 'classnames';
 import './Header.scss';
@@ -30,7 +31,12 @@ const Header = ({ isLoggedIn }) => {
             >
               Фильмы
             </NavLink>
-            <NavLink className='header__link' to='/saved-movies' replace>
+            <NavLink
+              className='header__link'
+              activeClassName='header__link_active'
+              to='/saved-movies'
+              replace
+            >
               Сохранённые фильмы
             </NavLink>
           </nav>
@@ -41,6 +47,10 @@ const Header = ({ isLoggedIn }) => {
               <img src={profileImage} alt='Аккаунт' />
             </button>
           </Link>
+
+          <button className='header__burger'>
+            <img src={burger} alt='Меню' className='header__burger-icon' />
+          </button>
         </>
       ) : (
         <div className='header__button-group'>

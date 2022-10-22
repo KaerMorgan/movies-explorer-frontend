@@ -1,6 +1,8 @@
+@import "variables";
+
 .promo {
-  padding-top: 75px;
-  padding-bottom: 75px;
+  max-width: 100%;
+  padding: 75px var(--width-padding);
 
   display: flex;
   flex-direction: row;
@@ -11,5 +13,18 @@
   &__image {
     height: 304px;
     width: 310px;
+
+    @include media-laptop {
+      margin: 0 auto 48px;
+    }
+
   }
+
+  @include media-laptop {
+    padding: 140px 0 46px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
 }
