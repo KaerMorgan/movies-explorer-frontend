@@ -10,10 +10,10 @@ const Footer = () => {
         <p className='footer__copyright'>© {new Date().getFullYear()}</p>
 
         <nav className='footer__links'>
-          <a href='https://practicum.yandex.ru/web/' className='footer__link'>
+          <a href='https://practicum.yandex.ru/web/' target='_blank' className='footer__link'>
             Яндекс.Практикум
           </a>
-          <a href='https://github.com/KaerMorgan' className='footer__link'>
+          <a href='https://github.com/KaerMorgan' target='_blank' className='footer__link'>
             Github
           </a>
         </nav>

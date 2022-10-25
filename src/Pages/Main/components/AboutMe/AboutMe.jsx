@@ -15,7 +15,7 @@ const AboutMe = () => {
           компании "Крэлком" фронтэнд-разработчиком. Курс практикума помог внести структуру в моё
           обучение и заново научил меня писать код, только лучше и осмысленнее.
         </p>
-        <a href='https://github.com/KaerMorgan' className='about-me__link'>
+        <a href='https://github.com/KaerMorgan' target='_blank' className='about-me__link'>
           Github
         </a>
       </div>
