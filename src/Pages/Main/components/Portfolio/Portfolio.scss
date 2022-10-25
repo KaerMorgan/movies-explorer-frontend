@@ -24,12 +24,30 @@
       font-size: 18px;
       line-height: 20px;
       color: #8B8B8B;
+
+      @include media-tablet {
+        font-size: 14px;
+        margin: 0 0 40px;
+        color: #A0A0A0;
+      }
     }
 
     &-item {
       max-height: 69px;
       padding: 0 0 19px;
       border-bottom: 1px solid#424242;
+
+      &:last-of-type {
+        border: none;
+      }
+
+      @include media-laptop {
+        border-bottom: 1px solid #E6E6E6;
+      }
+
+      @include media-tablet {
+        max-height: 49px;
+      }
     }
 
     &-link {
@@ -46,8 +64,17 @@
       justify-content: space-between;
       align-items: center;
 
+      p {
+        margin: 0;
+      }
+
       @include media-laptop {
         font-size: 28px;
+      }
+
+      @include media-tablet {
+        font-size: 18px;
+        line-height: 28px;
       }
     }
   }
@@ -62,5 +89,9 @@
 
   @include media-laptop {
     padding: 0 50px 90px;
+  }
+
+  @include media-tablet {
+    padding: 0 14px 70px;
   }
 }

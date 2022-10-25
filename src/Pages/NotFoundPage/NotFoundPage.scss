@@ -1,3 +1,5 @@
+@import "variables";
+
 .not-found {
   height: 100%;
   display: flex;
@@ -15,6 +17,12 @@
     font-size: 140px;
     line-height: 169px;
     color: var(--color-on-background);
+
+    @include media-mobile {
+      font-size: 80px;
+      line-height: 97px;
+      margin: 0 auto 10px;
+    }
   }
 
   &__subtitle {
@@ -26,6 +34,11 @@
     line-height: 19px;
     text-align: center;
     color: var(--color-on-background);
+
+    @include media-mobile {
+      font-size: 12px;
+      line-height: 15px;
+    }
   }
 
   &__link {
@@ -39,6 +52,11 @@
 
     &:hover {
       opacity: .8;
+    }
+
+    @include media-mobile {
+      font-size: 12px;
+      line-height: 15px;
     }
   }
 }

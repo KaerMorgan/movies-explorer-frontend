@@ -16,8 +16,8 @@ const Profile = () => {
     <>
       <Header isLoggedIn={true} />
       <main className='profile'>
-        <h1 className='profile__title'>{`Привет, ${name}!`}</h1>
-        <form>
+        <form className='profile__form'>
+          <h1 className='profile__title'>{`Привет, ${name}!`}</h1>
           <div className='profile__info'>
             <label className='profile__input-group'>
               <p className='profile__name'>Имя</p>
@@ -38,7 +38,7 @@ const Profile = () => {
             </label>
           </div>
           {!isEditMode ? (
-            <>
+            <div className='profile__button-group'>
               <button
                 className='profile__button'
                 onClick={() => {
@@ -55,7 +55,7 @@ const Profile = () => {
               >
                 Выйти из аккаунта
               </button>
-            </>
+            </div>
           ) : (
             <>
               {errors && <p className='profile__error'>При обновлении профиля произошла ошибка.</p>}

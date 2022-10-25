@@ -3,7 +3,7 @@ import './MoviesCardList.scss';
 const MoviesCardList = ({ children }) => {
   return (
     <section className='card-list'>
-      {children}
+      <ul className='card-list__container'>{children}</ul>
       <button className='card-list__button'>Ещё</button>
     </section>
   );

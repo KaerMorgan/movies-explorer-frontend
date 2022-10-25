@@ -18,13 +18,21 @@
       margin: 0 auto 48px;
     }
 
+    @include media-mobile {
+      height: 206px;
+      width: 210px;
+      margin: 0 auto 44px;
+    }
   }
 
   @include media-laptop {
-    padding: 140px 0 46px;
+    padding: 140px 0 76px;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
   }
 
+  @include media-tablet {
+    padding: 70px 10px 30px;
+  }
 }

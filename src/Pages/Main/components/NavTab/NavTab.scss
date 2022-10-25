@@ -1,6 +1,6 @@
 @import "variables";
 
-.promo {
+.nav-tab {
   &__text-group {
     max-width: 640px;
 
@@ -27,6 +27,14 @@
       font-size: 40px;
       line-height: 50px;
       text-align: center;
+      letter-spacing: -0.0423em;
+    }
+
+    @include media-tablet {
+      margin: 0 auto 24px;
+      font-size: 30px;
+      line-height: 38px;
+      letter-spacing: 0;
     }
   }
 
@@ -45,6 +53,11 @@
       text-align: center;
       margin: 0 auto 92px;
     }
+
+
+    @include media-tablet {
+      margin: 0 auto 80px;
+    }
   }
 
   &__button {
@@ -54,6 +67,9 @@
     border-radius: 3px;
     background-color: transparent;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     a {
       font-style: normal;
@@ -64,7 +80,6 @@
       font-family: var(--primary-font);
       color: var(--color-on-background);
     }
-
 
     &:hover {
       opacity: .8;

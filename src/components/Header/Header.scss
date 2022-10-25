@@ -13,6 +13,14 @@
 
   &_type_intro {
     background-color: var(--color-background-intro);
+
+    @include media-laptop {
+      padding: 15px 30px;
+    }
+
+    @include media-mobile {
+      padding: 18px 14px;
+    }
   }
 
   &__logo {
@@ -70,7 +78,7 @@
     cursor: pointer;
   }
 
-  &__burger {
+  &__burger-button {
     background-color: transparent;
     height: 44px;
     width: 44px;
@@ -84,12 +92,21 @@
     @include media-laptop {
       display: block;
     }
+
+    @include media-tablet {
+      width: 40px;
+      height: 43px;
+    }
   }
 
   &__button-group {
     display: flex;
     flex-direction: row;
     column-gap: 30px;
+
+    @include media-mobile {
+      column-gap: 14px;
+    }
   }
 
   &__register-button {
@@ -107,6 +124,10 @@
 
     &:hover {
       opacity: .8;
+    }
+
+    @include media-mobile {
+      font-size: 10px;
     }
   }
 
@@ -129,9 +150,131 @@
     &:hover {
       opacity: .8;
     }
+
+    @include media-mobile {
+      height: 26px;
+      width: 54px;
+      font-size: 10px;
+    }
   }
 
   @include media-laptop {
     padding: 18px 30px;
   }
+
+  @include media-tablet {
+    padding: 15px 14px 16px;
+  }
+}
+
+.burger-menu {
+  position: fixed;
+  width: 520px;
+  height: 100%;
+  z-index: 10;
+  top: 0px;
+  right: -520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #202020;
+  transition: all .5s ease-in-out;
+  padding-bottom: 100px;
+
+  @include media-tablet {
+    width: 100%;
+    right: -100%;
+  }
+
+  &_opened {
+    right: 0;
+  }
+
+  &__navbar {
+    padding: 160px 90px 0;
+    row-gap: 15px;
+    width: 100%;
+    flex: 1 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include media-tablet {
+      padding: 144px 10px 0;
+      row-gap: 24px;
+    }
+  }
+
+  &__close-button {
+    position: absolute;
+    display: flex;
+    padding: 0;
+    top: 22px;
+    right: 22px;
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    @include media-mobile {
+      top: 13px;
+      right: 13px;
+    }
+  }
+
+  &__close-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  &__link {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: var(--color-on-background);
+    text-decoration: none;
+    padding-bottom: 4px;
+
+    &:hover {
+      opacity: .8;
+    }
+
+    &_active {
+      border-bottom: 2px solid var(--color-on-background);
+    }
+
+    &_type-profile {
+      @extend .header__link;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 16px;
+
+      display: flex;
+      column-gap: 13px;
+      align-items: center;
+
+    }
+
+    @include media-tablet {
+      padding-bottom: 7px;
+    }
+  }
+
+  &__profile-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background-color: #313131;
+    border: none;
+    cursor: pointer;
+  }
+
+
 }

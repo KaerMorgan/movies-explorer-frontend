@@ -1,11 +1,12 @@
+@import "variables";
+
 .search-form {
   padding: 60px var(--width-padding) 0;
   width: 100%;
   font-family: var(--primary-font);
 
-
   &__search-bar {
-    width: 1140px;
+    width: 100%;
     padding: 0 6px 0 22px;
     margin: 0 auto 42px;
     display: flex;
@@ -15,16 +16,30 @@
     background: #2F2F2F;
     border-radius: 40px;
     height: 46px;
+
+    @include media-tablet {
+      padding: 6px 6px 6px 22px;
+    }
   }
 
   &__input {
     width: 100%;
     background-color: transparent;
     border: none;
-    color: var(--color-on-background);
+
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    color: #8B8B8B;
 
     &:focus {
       outline: none;
+    }
+
+    @include media-tablet {
+      font-size: 11px;
     }
   }
 
@@ -38,30 +53,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-
-    &:hover {
-      opacity: .8;
-    }
-  }
-
-  &__switch-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    column-gap: 12px;
-    margin: 0 auto;
-    padding-bottom: 81px;
-    border-bottom: 1px solid #424242;
-  }
-
-  &__switch-caption {
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 18px;
-    color: var(--color-on-background);
     cursor: pointer;
 
     &:hover {
@@ -101,5 +92,49 @@
       left: 18px;
       background-color: #2BE080;
     }
+
+    &-caption {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: var(--color-on-background);
+      cursor: pointer;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      @include media-tablet {
+        font-size: 11px;
+      }
+    }
+
+    &-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      column-gap: 12px;
+      margin: 0 auto;
+      padding-bottom: 81px;
+      border-bottom: 1px solid #424242;
+
+      @include media-laptop {
+        padding-bottom: 61px;
+      }
+
+      @include media-tablet {
+        column-gap: 13px;
+      }
+    }
+  }
+
+  @include media-laptop {
+    padding: 80px 30px 0;
+  }
+
+  @include media-laptop {
+    padding: 80px 14px 0;
   }
 }

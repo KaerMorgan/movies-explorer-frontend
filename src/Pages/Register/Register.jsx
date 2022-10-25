@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.png';
-import './Register.scss';
+import '../Login/Login.scss';
 
 const Register = () => {
   const error = false;

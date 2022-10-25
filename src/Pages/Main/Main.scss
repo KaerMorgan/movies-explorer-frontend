@@ -14,7 +14,12 @@
     letter-spacing: -0.04em;
     font-family: var(--primary-font);
     color: var(--color-on-background);
-  }
 
-  @include media-laptop {}
+    @include media-mobile {
+      margin: 0 0 28px;
+      font-size: 18px;
+      line-height: 22px;
+      order: 0;
+    }
+  }
 }

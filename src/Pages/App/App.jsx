@@ -8,19 +8,13 @@ import Register from '../Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 const App = () => {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   return (
     <Routes>
-      <Route path='/' element={isLoggedIn ? <Main /> : <Navigate to='/signup' replace />} />
-      <Route path='/movies' element={isLoggedIn ? <Movies /> : <Navigate to='/signup' replace />} />
-      <Route
-        path='/saved-movies'
-        element={isLoggedIn ? <SavedMovies /> : <Navigate to='/signup' replace />}
-      />
-      <Route
-        path='/profile'
-        element={isLoggedIn ? <Profile /> : <Navigate to='/signup' replace />}
-      />
+      <Route path='/' element={<Main />} />
+      <Route path='/movies' element={<Movies />} />
+      <Route path='/saved-movies' element={<SavedMovies />} />
+      <Route path='/profile' element={<Profile />} />
       <Route path='/signin' element={isLoggedIn ? <Navigate to='/' replace /> : <Login />} />
       <Route path='/signup' element={isLoggedIn ? <Navigate to='/' replace /> : <Register />} />
       <Route path='*' element={<NotFoundPage />} />
