@@ -19,7 +19,7 @@ const MoviesCard = ({ data = {}, saved = false }) => {
       <img src={image || filler} alt='Кадр из трейлера' className='card__image' />
       <div className='card__text-group'>
         <h3 className='card__title'>{name || '33 слова о дизайне'}</h3>
-        <button className='card__like' onClick={likeClickHandler}>
+        <button type='button' className='card__like' onClick={likeClickHandler}>
           <img
             src={
               (isLiked && !saved && liked) ||

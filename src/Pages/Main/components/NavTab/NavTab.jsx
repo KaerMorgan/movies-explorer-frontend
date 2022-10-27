@@ -12,7 +12,7 @@ const NavTab = () => {
       <p className='nav-tab__subtitle'>
         Листайте ниже, чтобы узнать больше про этот проект и его создателя.
       </p>
-      <button className='nav-tab__button'>
+      <button type='button' className='nav-tab__button'>
         <Link to='/movies'>Узнать больше</Link>
       </button>
     </div>

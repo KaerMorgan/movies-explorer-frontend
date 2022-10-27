@@ -24,7 +24,15 @@ const Register = () => {
         </label>
         {error && <span className='register__error'>Что-то пошло не так...</span>}
         <div className='register__bottom-group'>
-          <button className='register__submit'>Зарегистрироваться</button>
+          <button
+            type='submit'
+            className='register__submit'
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Зарегистрироваться
+          </button>
           <p className='register__caption'>
             Уже зарегистрированы?
             <Link className='register__link' to='/signin' replace>

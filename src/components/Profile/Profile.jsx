@@ -40,6 +40,7 @@ const Profile = () => {
           {!isEditMode ? (
             <div className='profile__button-group'>
               <button
+                type='button'
                 className='profile__button'
                 onClick={() => {
                   setIsEditMode(true);
@@ -48,6 +49,7 @@ const Profile = () => {
                 Редактировать
               </button>
               <button
+                type='button'
                 className='profile__button'
                 onClick={() => {
                   navigate('/signin');
@@ -60,9 +62,11 @@ const Profile = () => {
             <>
               {errors && <p className='profile__error'>При обновлении профиля произошла ошибка.</p>}
               <button
+                type='submit'
                 className='profile__submit'
                 disabled={errors}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setIsEditMode(false);
                 }}
               >

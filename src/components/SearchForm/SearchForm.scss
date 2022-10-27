@@ -6,6 +6,7 @@
   font-family: var(--primary-font);
 
   &__search-bar {
+    border: none;
     width: 100%;
     padding: 0 6px 0 22px;
     margin: 0 auto 42px;
@@ -16,6 +17,8 @@
     background: #2F2F2F;
     border-radius: 40px;
     height: 46px;
+    outline-color: #fff;
+
 
     @include media-tablet {
       padding: 6px 6px 6px 22px;
@@ -32,7 +35,11 @@
     font-weight: 400;
     font-size: 13px;
     line-height: 17px;
-    color: #8B8B8B;
+    color: var(--color-on-background);
+
+    &::placeholder {
+      color: #8B8B8B;
+    }
 
     &:focus {
       outline: none;
@@ -43,7 +50,7 @@
     }
   }
 
-  &__button {
+  &__submit {
     height: 34px;
     width: 34px;
     border-radius: 48px;
@@ -111,12 +118,14 @@
     }
 
     &-group {
+      border: none;
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       column-gap: 12px;
       margin: 0 auto;
+      padding: 0;
       padding-bottom: 81px;
       border-bottom: 1px solid #424242;
 

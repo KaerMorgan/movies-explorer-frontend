@@ -3,22 +3,28 @@ import './SearchForm.scss';
 
 const SearchForm = () => {
   return (
-    <section className='search-form'>
-      <div className='search-form__search-bar'>
-        <input type='text' className='search-form__input' placeholder='Фильм' />
+    <form className='search-form'>
+      <fieldset className='search-form__search-bar'>
+        <input type='text' className='search-form__input' placeholder='Фильм' required />
 
-        <button className='search-form__button'>
+        <button
+          type='submit'
+          className='search-form__submit'
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
           <img src={search} alt='Искать' className='search-form__button-image' />
         </button>
-      </div>
+      </fieldset>
 
-      <div className='search-form__switch-group'>
+      <fieldset className='search-form__switch-group'>
         <input type='checkbox' name='toggle-switch' className='search-form__switch' id='toggle' />
         <label htmlFor='toggle' className='search-form__switch-caption'>
           Короткометражки
         </label>
-      </div>
-    </section>
+      </fieldset>
+    </form>
   );
 };
 

@@ -4,7 +4,9 @@ const MoviesCardList = ({ children }) => {
   return (
     <section className='card-list'>
       <ul className='card-list__container'>{children}</ul>
-      <button className='card-list__button'>Ещё</button>
+      <button type='button' className='card-list__button'>
+        Ещё
+      </button>
     </section>
   );
 };

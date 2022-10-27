@@ -20,7 +20,15 @@ const Login = () => {
         </label>
         {error && <span className='login__error'>Что-то пошло не так...</span>}
         <div className='login__bottom-group'>
-          <button className='login__submit'>Войти</button>
+          <button
+            type='submit'
+            className='login__submit'
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Войти
+          </button>
           <p className='login__caption'>
             Ещё не зарегистрированы?
             <Link className='login__link' to='/signup' replace>
