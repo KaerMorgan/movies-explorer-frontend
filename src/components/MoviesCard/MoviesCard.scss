@@ -1,0 +1,102 @@
+@import "variables";
+
+.card {
+  width: 364px;
+  border-radius: 6px;
+  background: #222222;
+  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    width: 364px;
+    height: 203px;
+    margin: 0 auto 9px;
+    cursor: pointer;
+
+    @include media-laptop {
+      width: 339px;
+      height: 190px;
+      margin: 0 auto 8px;
+    }
+
+    @include media-tablet {
+      width: 300px;
+      height: 168px;
+      margin: 0 auto 7px;
+    }
+  }
+
+  &__text-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 16px 10px;
+
+    @include media-laptop {
+      margin: 0 14px 7px;
+    }
+
+    @include media-tablet {
+      margin: 0 10px 6px 14px;
+    }
+  }
+
+  &__title {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    color: var(--color-on-background);
+    margin: 0;
+
+    @include media-tablet {
+      font-size: 12px;
+      line-height: 15px;
+    }
+  }
+
+  &__like {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  &__caption {
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 13px;
+    color: #8B8B8B;
+    margin: 0 auto 16px 16px;
+
+    @include media-laptop {
+      margin: 0 auto 14px 14px;
+    }
+
+    @include media-laptop {
+      font-size: 10px;
+      line-height: 12px;
+      margin: 0 auto 14px 14px;
+    }
+  }
+
+  @include media-laptop {
+    width: 339px;
+  }
+
+  @include media-tablet {
+    width: 300px;
+  }
+}

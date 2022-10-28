@@ -1,0 +1,62 @@
+@import "variables";
+
+.card-list {
+  max-width: 100%;
+  padding: 70px var(--width-padding) 80px;
+
+  &__container {
+    padding: 0 0 80px;
+    margin: 0;
+    list-style: none;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(270px, 1fr));
+    grid-auto-rows: 281px;
+    gap: 37px 24px;
+    justify-items: center;
+
+    @include media-laptop {
+      padding: 0 0 80px;
+      gap: 30px;
+      grid-template-columns: repeat(2, minmax(270px, 1fr));
+      grid-auto-rows: 262px;
+    }
+
+    @include media-tablet {
+      padding: 0 0 76px;
+      gap: 14px;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 237px;
+    }
+  }
+
+  &__button {
+    height: 36px;
+    width: 100%;
+    background: #2F2F2F;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    color: var(--color-on-background);
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    text-align: center;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  @include media-laptop {
+    padding: 70px 30px 80px;
+    gap: 30px;
+  }
+
+  @include media-tablet {
+    padding: 50px 10px 80px;
+    gap: 14px;
+  }
+}

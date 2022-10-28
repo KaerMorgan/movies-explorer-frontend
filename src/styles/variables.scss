@@ -1,0 +1,29 @@
+* {
+  --color-background: #202020;
+  --color-background-variant: #272727;
+  --color-on-background: #ffffff;
+  --color-background-intro: #073042;
+  --color-accent: #3DDC84;
+
+  --primary-font: 'Inter', "Open Sans", Arial, sans-serif;
+
+  --width-padding: calc((100% - 1140px) /2);
+}
+
+@mixin media-laptop {
+  @media (max-width: 1279px) {
+    @content;
+  }
+}
+
+@mixin media-tablet {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin media-mobile {
+  @media (max-width: 524px) {
+    @content;
+  }
+}

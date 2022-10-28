@@ -1,0 +1,149 @@
+@import "variables";
+
+.search-form {
+  padding: 60px var(--width-padding) 0;
+  width: 100%;
+  font-family: var(--primary-font);
+
+  &__search-bar {
+    border: none;
+    width: 100%;
+    padding: 0 6px 0 22px;
+    margin: 0 auto 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: #2F2F2F;
+    border-radius: 40px;
+    height: 46px;
+    outline-color: #fff;
+
+
+    @include media-tablet {
+      padding: 6px 6px 6px 22px;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+
+    font-family: var(--primary-font);
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+    color: var(--color-on-background);
+
+    &::placeholder {
+      color: #8B8B8B;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    @include media-tablet {
+      font-size: 11px;
+    }
+  }
+
+  &__submit {
+    height: 34px;
+    width: 34px;
+    border-radius: 48px;
+    background-color: #4285F4;
+    border: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
+  // сгенерированные стили мне очень не понравились так как они едва различимы,
+  // поэтому я поменял background-color чекбокса на тот же что использует input выше
+  &__switch {
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+    outline: none;
+    width: 36px;
+    height: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: #2F2F2F;
+    box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background-color: transparent;
+      border-radius: 50%;
+      background-color: #A0A0A0;
+      transition: all 0.2s ease-in-out;
+
+    }
+
+    &:checked:after {
+      left: 18px;
+      background-color: #2BE080;
+    }
+
+    &-caption {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: var(--color-on-background);
+      cursor: pointer;
+
+      &:hover {
+        opacity: .8;
+      }
+
+      @include media-tablet {
+        font-size: 11px;
+      }
+    }
+
+    &-group {
+      border: none;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      column-gap: 12px;
+      margin: 0 auto;
+      padding: 0;
+      padding-bottom: 81px;
+      border-bottom: 1px solid #424242;
+
+      @include media-laptop {
+        padding-bottom: 61px;
+      }
+
+      @include media-tablet {
+        column-gap: 13px;
+      }
+    }
+  }
+
+  @include media-laptop {
+    padding: 80px 30px 0;
+  }
+
+  @include media-laptop {
+    padding: 80px 14px 0;
+  }
+}

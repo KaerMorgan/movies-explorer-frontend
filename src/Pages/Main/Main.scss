@@ -1,0 +1,25 @@
+@import "variables";
+
+.main {
+  min-width: 100%;
+  font-family: var(--primary-font);
+  color: var(--color-on-background);
+
+  &__section-title {
+    margin: 0 0 23px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    font-family: var(--primary-font);
+    color: var(--color-on-background);
+
+    @include media-mobile {
+      margin: 0 0 28px;
+      font-size: 18px;
+      line-height: 22px;
+      order: 0;
+    }
+  }
+}
