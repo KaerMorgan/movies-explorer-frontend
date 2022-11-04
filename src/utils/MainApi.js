@@ -1,11 +1,11 @@
 const BASE_URL = `${window.location.protocol}//api.movies-explorer.nomoredomains.sbs`;
 
-function checkErorr(res) {
+const checkErorr = (res) => {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject('Ошибка: ' + res.status);
-}
+};
 
 export const register = ({ name, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
@@ -37,14 +37,14 @@ export const login = ({ email, password }) => {
 export const getUserInfo = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: _getToken() },
+    headers: { 'Content-Type': 'application/json', authorization: getToken() },
   }).then(checkErorr);
 };
 
 export const changeUserInfo = ({ name, email }) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', authorization: _getToken() },
+    headers: { 'Content-Type': 'application/json', authorization: getToken() },
     body: JSON.stringify({
       name: name,
       email: email,
@@ -52,6 +52,13 @@ export const changeUserInfo = ({ name, email }) => {
   }).then(checkErorr);
 };
 
-const _getToken = () => {
+export const getSavedMovies = () => {
+  return fetch(`${BASE_URL}/movies`, {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', authorization: getToken() },
+  }).then(checkErorr);
+};
+
+const getToken = () => {
   return `Bearer ${localStorage.getItem('token')}`;
 };

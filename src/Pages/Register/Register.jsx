@@ -21,7 +21,7 @@ const Register = () => {
       localStorage.setItem('isLogged', true);
       setValues({});
       setIsValid(false);
-      navigate('/');
+      navigate('/movies');
     } catch (error) {
       setIsValid(false);
 

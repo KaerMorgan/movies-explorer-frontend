@@ -4,10 +4,10 @@ import like from '../../images/like.png';
 import liked from '../../images/liked.png';
 import cross from '../../images/cross.png';
 import './MoviesCard.scss';
+import { useNavigation } from 'react-router-dom';
 
 const MoviesCard = ({ data = {}, saved = false }) => {
-  const { nameRU, image, duration } = data;
-
+  const { nameRU, image, duration, description } = data;
   const [isLiked, setIsLiked] = useState(false);
 
   function likeClickHandler() {
@@ -17,12 +17,15 @@ const MoviesCard = ({ data = {}, saved = false }) => {
   return (
     <li className='card'>
       <img
-        src={`https://api.nomoreparties.co/${image.url}` || filler}
-        alt={`Кадр из трейлера фильма ${nameRU}`}
+        src={`https://api.nomoreparties.co/${image.url}`}
+        alt={description}
         className='card__image'
+        onClick={() => {
+          window.open(data.trailerLink);
+        }}
       />
       <div className='card__text-group'>
-        <h3 className='card__title'>{nameRU || '33 слова о дизайне'}</h3>
+        <h3 className='card__title'>{nameRU}</h3>
         <button type='button' className='card__like' onClick={likeClickHandler}>
           <img
             src={
@@ -37,7 +40,7 @@ const MoviesCard = ({ data = {}, saved = false }) => {
           />
         </button>
       </div>
-      <p className='card__caption'>{duration || '1ч 47м'}</p>
+      <p className='card__caption'>{duration}</p>
     </li>
   );
 };
