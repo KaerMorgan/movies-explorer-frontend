@@ -7,7 +7,8 @@ import profileImage from '../../images/profile-image.png';
 import cn from 'classnames';
 import './Header.scss';
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
+  const isLoggedIn = localStorage.getItem('isLogged');
   const [isBurgerMenuActive, setIsBurgerMenuActive] = useState(false);
 
   const navigate = useNavigate();
@@ -95,11 +96,11 @@ const Header = ({ isLoggedIn }) => {
             <img src={close} alt='Закрыть меню' className='burger-menu__close-icon' />
           </button>
           <NavLink
-            exact
             activeClassName='burger-menu__link_active'
             className='burger-menu__link'
             to='/'
             replace
+            exact
           >
             Главная
           </NavLink>

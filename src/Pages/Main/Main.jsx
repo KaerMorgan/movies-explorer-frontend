@@ -10,11 +10,9 @@ import Footer from '../../components/Footer';
 import './Main.scss';
 
 const Main = () => {
-  const [isLoggedIn, setIsLogged] = useState(false);
-
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header />
       <main className='main'>
         <Promo>
           <NavTab />

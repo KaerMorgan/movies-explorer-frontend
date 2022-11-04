@@ -127,6 +127,14 @@
       opacity: .8;
     }
 
+    &:disabled {
+      background-color: #F8F8F8;
+      color: #C2C2C2;
+      opacity: .9;
+      pointer-events: none;
+      user-select: none;
+    }
+
     @include media-mobile {
       margin: 0 auto 16px;
       font-size: 12px;

@@ -6,7 +6,7 @@ import cross from '../../images/cross.png';
 import './MoviesCard.scss';
 
 const MoviesCard = ({ data = {}, saved = false }) => {
-  const { name, image, duration } = data;
+  const { nameRU, image, duration } = data;
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -16,9 +16,13 @@ const MoviesCard = ({ data = {}, saved = false }) => {
 
   return (
     <li className='card'>
-      <img src={image || filler} alt='Кадр из трейлера' className='card__image' />
+      <img
+        src={`https://api.nomoreparties.co/${image.url}` || filler}
+        alt={`Кадр из трейлера фильма ${nameRU}`}
+        className='card__image'
+      />
       <div className='card__text-group'>
-        <h3 className='card__title'>{name || '33 слова о дизайне'}</h3>
+        <h3 className='card__title'>{nameRU || '33 слова о дизайне'}</h3>
         <button type='button' className='card__like' onClick={likeClickHandler}>
           <img
             src={

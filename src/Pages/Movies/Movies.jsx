@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { FilmsContext } from '../../contexts/FilmsContext';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import MoviesCard from '../../components/MoviesCard';
@@ -6,8 +8,9 @@ import SearchForm from '../../components/SearchForm';
 import Preloader from '../../components/Preloader';
 
 const Movies = () => {
-  const cards = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-  const isLoading = false;
+  const filmsList = useContext(FilmsContext);
+
+  const isLoading = filmsList.length == 0;
   return (
     <>
       <Header isLoggedIn={true} />
@@ -18,11 +21,8 @@ const Movies = () => {
           <Preloader />
         ) : (
           <MoviesCardList>
-            {/* {cards.map((card) => {
-            return <Card data={card} />;
-          })} */}
-            {cards.map((card, index) => {
-              return <MoviesCard key={index} />;
+            {filmsList.map((card, index) => {
+              return <MoviesCard data={card} key={index} />;
             })}
           </MoviesCardList>
         )}
