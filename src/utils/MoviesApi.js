@@ -8,10 +8,6 @@ const checkErorr = (res) => {
 export const getMovies = () => {
   return fetch('https://api.nomoreparties.co/beatfilm-movies', {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: getToken() },
+    headers: { 'Content-Type': 'application/json' },
   }).then(checkErorr);
-};
-
-const getToken = () => {
-  return `Bearer ${localStorage.getItem('token')}`;
 };

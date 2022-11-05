@@ -24,8 +24,8 @@ const Login = ({ onLogin }) => {
       localStorage.setItem('isLogged', true);
       setValues({});
       setIsValid(false);
+      await onLogin();
       navigate('/movies');
-      onLogin();
     } catch (error) {
       setIsValid(false);
 

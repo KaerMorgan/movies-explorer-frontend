@@ -1,23 +1,16 @@
 import cn from 'classnames';
-import { useState } from 'react';
 import search from '../../images/search-button.png';
 import './SearchForm.scss';
 
-const SearchForm = ({ onSubmit, onCheck, checked }) => {
-  const [inputValue, setInputValue] = useState(localStorage.getItem('searchFilmValue') ?? '');
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem('searchFilmValue', inputValue);
-    onSubmit();
-  };
-
+const SearchForm = ({ onSubmit, onCheckboxSwitch, checked, inputValue, onInputChange }) => {
   return (
-    <form className='search-form' onSubmit={handleFormSubmit}>
+    <form
+      className='search-form'
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit(e);
+      }}
+    >
       <fieldset className='search-form__search-bar'>
         <input
           type='text'
@@ -25,7 +18,10 @@ const SearchForm = ({ onSubmit, onCheck, checked }) => {
           className='search-form__input'
           placeholder='Фильм'
           value={inputValue}
-          onChange={handleInputChange}
+          onChange={(e) => {
+            e.preventDefault();
+            onInputChange(e.target.value);
+          }}
           required
         />
 
@@ -44,7 +40,7 @@ const SearchForm = ({ onSubmit, onCheck, checked }) => {
           checked={checked}
           id='toggle'
           onChange={() => {
-            onCheck();
+            onCheckboxSwitch();
           }}
         />
         <label htmlFor='toggle' className='search-form__switch-caption'>

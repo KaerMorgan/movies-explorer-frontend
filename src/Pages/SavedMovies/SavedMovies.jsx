@@ -1,28 +1,37 @@
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import MoviesCard from '../../components/MoviesCard';
 import MoviesCardList from '../../components/MoviesCardList';
 import SearchForm from '../../components/SearchForm';
+import Preloader from '../../components/Preloader';
+import '../Movies/Movies.scss';
 
-const SavedMovies = () => {
-  const cards = [1, 1, 1];
-
+const SavedMovies = ({
+  cards,
+  isLoading,
+  checked,
+  inputValue,
+  onInputChange,
+  onCheckboxSwitch,
+  onFormSubmit,
+  onLike,
+}) => {
   return (
     <>
       <Header isLoggedIn={true} />
-      <SearchForm />
-      {/* {isLoading ? (
-      <Preloader />
-    ) : ( */}
-      <MoviesCardList>
-        {/* {cards.map((card) => {
-          return <Card data={card} />;
-        })} */}
-        {cards.map((card, index) => {
-          return <MoviesCard key={index} saved={true} />;
-        })}
-      </MoviesCardList>
-      {/* )} */}
+      <SearchForm
+        checked={checked}
+        onCheckboxSwitch={onCheckboxSwitch}
+        onSubmit={onFormSubmit}
+        inputValue={inputValue}
+        onInputChange={onInputChange}
+      />
+      {isLoading ? (
+        <Preloader />
+      ) : !isLoading && cards.length > 0 ? (
+        <MoviesCardList cards={cards} onLike={onLike} />
+      ) : !isLoading && cards.length < 1 ? (
+        <h2 className='movies__message'>Нет сохранённых фильмов</h2>
+      ) : null}
       <Footer />
     </>
   );

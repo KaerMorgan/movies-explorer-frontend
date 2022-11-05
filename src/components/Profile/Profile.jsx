@@ -91,8 +91,7 @@ const Profile = ({ onUserInfoChange }) => {
                 type='button'
                 className='profile__button'
                 onClick={() => {
-                  localStorage.removeItem('token');
-                  localStorage.removeItem('isLogged');
+                  localStorage.clear();
                   navigate('/signin');
                 }}
               >

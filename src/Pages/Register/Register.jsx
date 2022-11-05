@@ -6,7 +6,7 @@ import Popup from '../../components/Popup';
 import logo from '../../images/logo.png';
 import '../Login/Login.scss';
 
-const Register = () => {
+const Register = ({ onLogin }) => {
   const [popupErrorMessage, setPopupErrorMessage] = useState('');
   const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormValidation();
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const Register = () => {
       localStorage.setItem('isLogged', true);
       setValues({});
       setIsValid(false);
+      await onLogin();
       navigate('/movies');
     } catch (error) {
       setIsValid(false);

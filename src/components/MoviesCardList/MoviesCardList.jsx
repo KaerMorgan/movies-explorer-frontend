@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import MoviesCard from '../../components/MoviesCard';
 import './MoviesCardList.scss';
 
-const MoviesCardList = ({ cards }) => {
-  const [paginatedList, setPaginatedList] = useState([]);
+const MoviesCardList = ({ cards, onLike }) => {
   const [width, setWidth] = useState(0);
   const [endofArray, setEndofArray] = useState(0);
 
@@ -38,19 +37,22 @@ const MoviesCardList = ({ cards }) => {
     };
   }, [width]);
 
-  console.log(width);
-  console.log(endofArray);
-
   return (
     <section className='card-list'>
       <ul className='card-list__container'>
         {cards.map((card, index) => {
-          return index <= endofArray && <MoviesCard data={card} key={index + card.nameRU} />;
+          return (
+            index <= endofArray && (
+              <MoviesCard data={card} key={index + card.nameRU} onLike={onLike} />
+            )
+          );
         })}
       </ul>
-      <button type='button' className='card-list__button' onClick={handleMoreClick}>
-        Ещё
-      </button>
+      {endofArray >= cards.length - 1 ? null : (
+        <button type='button' className='card-list__button' onClick={handleMoreClick}>
+          Ещё
+        </button>
+      )}
     </section>
   );
 };
