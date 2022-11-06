@@ -19,3 +19,11 @@
 ## Ссылка на макет
 
 https://www.figma.com/file/1dkfNhD3kQVVBfF33s6vqo/Diploma-(Copy)?node-id=891%3A3857
+
+## Ссылка на пул реквест
+
+https://github.com/KaerMorgan/movies-explorer-frontend/pull/2
+
+## Ссылка на фронтенд
+
+http://morgankatarn.nomoredomains.sbs
