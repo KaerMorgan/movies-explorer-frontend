@@ -21,7 +21,7 @@ const App = () => {
   const [allSavedFilms, setAllSavedFilms] = useState(
     JSON.parse(localStorage.getItem('savedFilms')) ?? [],
   );
-  const [allFilms, setAllFilms] = useState([]);
+  const [allFilms, setAllFilms] = useState(JSON.parse(localStorage.getItem('allFilms')) ?? []);
   const [filteredSavedFilmsList, setFilteredSavedFilmsList] = useState(allSavedFilms);
   const [filteredFilmsList, setFilteredFilmsList] = useState(
     JSON.parse(localStorage.getItem('filteredFilms')) ?? [],
@@ -207,7 +207,7 @@ const App = () => {
       setAllSavedFilms([]);
       setFilteredSavedFilmsList([]);
       setFilteredFilmsList([]);
-      setSearchFilmValue('');
+      // setSearchFilmValue('');
       setSearchSavedFilmValue('');
       setShortFilmsChecked(false);
       setShortSavedFilmsChecked(false);
@@ -217,11 +217,12 @@ const App = () => {
 
   // фильтрация фильмов при каждом переключении чекбокса
   useLayoutEffect(() => {
-    const filteredFilms = filterFilms(allFilms, searchFilmValue);
-    const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
-    setFilteredFilmsList(switchedFilms);
-
-    localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
+    if (allFilms.length > 0) {
+      const filteredFilms = filterFilms(allFilms, searchFilmValue);
+      const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
+      setFilteredFilmsList(switchedFilms);
+      localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
+    }
   }, [shortFilmsChecked]);
 
   useLayoutEffect(() => {
