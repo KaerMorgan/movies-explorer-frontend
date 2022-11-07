@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { getMovies } from '../../utils/MoviesApi';
 import Main from '../Main';
 import Movies from '../Movies';
@@ -13,14 +13,15 @@ import ProtectedRoute from '../../components/ProtectedRoute';
 import { getSavedMovies, getUserInfo, removeMovie, saveMovie } from '../../utils/MainApi';
 
 const App = () => {
-  const savedMoviesPageOpened = window.location.href.indexOf('saved-movies') != -1;
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState({});
 
   const [allSavedFilms, setAllSavedFilms] = useState(
     JSON.parse(localStorage.getItem('savedFilms')) ?? [],
   );
+  const [allFilms, setAllFilms] = useState([]);
   const [filteredSavedFilmsList, setFilteredSavedFilmsList] = useState(allSavedFilms);
   const [filteredFilmsList, setFilteredFilmsList] = useState(
     JSON.parse(localStorage.getItem('filteredFilms')) ?? [],
@@ -39,6 +40,12 @@ const App = () => {
   );
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const clearSavedQuery = () => {
+    setSearchSavedFilmValue('');
+    const switchedInitialist = switchFilmsType(allSavedFilms, shortSavedFilmsChecked);
+    setFilteredSavedFilmsList(switchedInitialist);
+  };
 
   const switchFilmsType = (films, checkState) => {
     if (checkState) {
@@ -68,31 +75,49 @@ const App = () => {
   };
 
   const onLogin = async () => {
-    const user = await getUserInfo();
-    setUserInfo(user);
-  };
-
-  const onInputChange = (value) => {
-    if (savedMoviesPageOpened) {
-      setSearchSavedFilmValue(value);
-    } else {
-      setSearchFilmValue(value);
+    // это должно справиться с проверкой токена
+    try {
+      const user = await getUserInfo();
+      setUserInfo(user);
+      localStorage.setItem('isLogged', true);
+    } catch (error) {
+      localStorage.clear();
+      navigate('/');
     }
   };
 
-  const onCheckboxSwitch = () => {
-    if (savedMoviesPageOpened) {
+  const onInputChange = (target) => {
+    if (target.classList.contains('saved-films')) {
+      setSearchSavedFilmValue(target.value);
+    } else {
+      setSearchFilmValue(target.value);
+    }
+  };
+
+  const onCheckboxSwitch = (target) => {
+    if (target.classList.contains('saved-films')) {
       localStorage.setItem('savedFilmsCheckbox', !shortSavedFilmsChecked);
       setShortSavedFilmsChecked(!shortSavedFilmsChecked);
-      // почему на следующей строке после установки нового стейта он всё ещё не обновлен?
     } else {
       localStorage.setItem('filmsCheckbox', !shortFilmsChecked);
       setShortFilmsChecked(!shortFilmsChecked);
     }
   };
 
-  const onFormSubmit = async () => {
-    if (savedMoviesPageOpened) {
+  const onFormSubmit = async (target) => {
+    let fetchedMovies = JSON.parse(localStorage.getItem('allFilms'));
+
+    if (!fetchedMovies || fetchedMovies.length == 0) {
+      try {
+        fetchedMovies = await getMovies();
+        localStorage.setItem('allFilms', JSON.stringify(fetchedMovies));
+        setAllFilms(fetchedMovies);
+      } catch (error) {
+        console.log('Ошибка при получении списка фильмов с BeatFilms', error);
+      }
+    }
+
+    if (target.classList.contains('saved-films')) {
       const savedMovies = JSON.parse(localStorage.getItem('savedFilms'));
 
       const filteredSavedFilms = filterFilms(savedMovies, searchSavedFilmValue);
@@ -101,25 +126,21 @@ const App = () => {
 
       setFilteredSavedFilmsList(switchedSavedFilms);
     } else {
-      try {
-        setIsLoading(true);
-        localStorage.setItem('searchFilmValue', searchFilmValue);
+      setIsLoading(true);
+      localStorage.setItem('searchFilmValue', searchFilmValue);
 
-        const allMovies = await getMovies();
+      const filteredFilms = filterFilms(
+        allFilms.length > 0 ? allFilms : fetchedMovies,
+        searchFilmValue,
+      );
 
-        const filteredFilms = filterFilms(allMovies, searchFilmValue);
+      const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
 
-        const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
+      setFilteredFilmsList(switchedFilms);
 
-        setFilteredFilmsList(switchedFilms);
+      localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
 
-        localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
-
-        setIsLoading(false);
-      } catch (error) {
-        // TODO обработка ошибок
-        console.log('Ошибка при получении фильмов: ', error);
-      }
+      setIsLoading(false);
     }
   };
 
@@ -140,8 +161,12 @@ const App = () => {
         await removeMovie(cardToDelete._id);
         const newSavedMovies = allSavedFilms.filter((item) => item._id != cardToDelete._id);
         setAllSavedFilms(newSavedMovies);
-        setFilteredSavedFilmsList(newSavedMovies);
         localStorage.setItem('savedFilms', JSON.stringify(newSavedMovies));
+
+        const filteredSavedFilms = filterFilms(newSavedMovies, searchSavedFilmValue);
+
+        const switchedSavedFilms = switchFilmsType(filteredSavedFilms, shortSavedFilmsChecked);
+        setFilteredSavedFilmsList(switchedSavedFilms);
       } catch (error) {
         // TODO обработка ошибок
         console.log('Ошибка при удалении карточки: ', error);
@@ -161,21 +186,51 @@ const App = () => {
 
   useEffect(() => {
     (async () => {
-      onLogin();
-      setIsLoading(true);
-      const savedFilms = await getSavedMovies();
-      setAllSavedFilms(savedFilms);
-      const switchedSavedFilms = switchFilmsType(savedFilms, shortSavedFilmsChecked);
-      setFilteredSavedFilmsList(switchedSavedFilms);
-      localStorage.setItem('savedFilms', JSON.stringify(savedFilms));
-      setIsLoading(false);
+      try {
+        await onLogin();
+      } catch (error) {
+        console.log('Ошибка при запросе данных о пользователе', error);
+      }
+      try {
+        setIsLoading(true);
+        const savedFilms = await getSavedMovies();
+        setAllSavedFilms(savedFilms);
+        const switchedSavedFilms = switchFilmsType(savedFilms, shortSavedFilmsChecked);
+        setFilteredSavedFilmsList(switchedSavedFilms);
+        localStorage.setItem('savedFilms', JSON.stringify(savedFilms));
+        setIsLoading(false);
+      } catch (error) {
+        console.log('Ошибка при запросе сохранённых фильмов', error);
+      }
     })();
+    return () => {
+      setAllSavedFilms([]);
+      setFilteredSavedFilmsList([]);
+      setFilteredFilmsList([]);
+      setSearchFilmValue('');
+      setSearchSavedFilmValue('');
+      setShortFilmsChecked(false);
+      setShortSavedFilmsChecked(false);
+      setIsLoading(false);
+    };
   }, [token]);
 
   // фильтрация фильмов при каждом переключении чекбокса
-  useEffect(() => {
-    onFormSubmit();
-  }, [shortFilmsChecked, shortSavedFilmsChecked]);
+  useLayoutEffect(() => {
+    const filteredFilms = filterFilms(allFilms, searchFilmValue);
+    const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
+    setFilteredFilmsList(switchedFilms);
+
+    localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
+  }, [shortFilmsChecked]);
+
+  useLayoutEffect(() => {
+    const filteredSavedFilms = filterFilms(allSavedFilms, searchSavedFilmValue);
+
+    const switchedSavedFilms = switchFilmsType(filteredSavedFilms, shortSavedFilmsChecked);
+
+    setFilteredSavedFilmsList(switchedSavedFilms);
+  }, [shortSavedFilmsChecked]);
 
   return (
     <UserContext.Provider value={userInfo}>
@@ -207,6 +262,7 @@ const App = () => {
                 isLoading={isLoading}
                 checked={shortSavedFilmsChecked}
                 inputValue={searchSavedFilmValue}
+                onCleanUp={clearSavedQuery}
                 onInputChange={onInputChange}
                 onCheckboxSwitch={onCheckboxSwitch}
                 onFormSubmit={onFormSubmit}
@@ -223,8 +279,11 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/signin' element={<Login onLogin={onLogin} />} />
-        <Route path='/signup' element={<Register onLogin={onLogin} />} />
+        <Route path='/signin' element={token ? <Navigate to='/' /> : <Login onLogin={onLogin} />} />
+        <Route
+          path='/signup'
+          element={token ? <Navigate to='/' /> : <Register onLogin={onLogin} />}
+        />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </UserContext.Provider>

@@ -28,6 +28,7 @@ const Movies = ({
           onSubmit={onFormSubmit}
           inputValue={inputValue}
           onInputChange={onInputChange}
+          isLoading={isLoading}
         />
         {isLoading ? (
           <Preloader />

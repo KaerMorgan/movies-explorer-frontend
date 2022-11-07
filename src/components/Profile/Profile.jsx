@@ -10,6 +10,7 @@ import './Profile.scss';
 const Profile = ({ onUserInfoChange }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
+  const [requestPending, setRequestPending] = useState(false);
 
   const userInfo = useContext(UserContext);
 
@@ -18,8 +19,12 @@ const Profile = ({ onUserInfoChange }) => {
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
+    setRequestPending(true);
     try {
-      const changedInfo = await changeUserInfo(values);
+      const changedInfo = await changeUserInfo({
+        name: values.name ?? userInfo.name,
+        email: values.email ?? userInfo.email,
+      });
       setIsEditMode(false);
       onUserInfoChange(changedInfo);
       setPopupMessage('Данные успешно изменены.');
@@ -33,6 +38,7 @@ const Profile = ({ onUserInfoChange }) => {
         setPopupMessage('При обновлении профиля произошла ошибка.');
       }
     }
+    setRequestPending(false);
   };
 
   const onPopupClose = () => {
@@ -52,7 +58,7 @@ const Profile = ({ onUserInfoChange }) => {
                 <input
                   className='profile__input'
                   type='text'
-                  placeholder={values.name}
+                  value={values.name ?? userInfo.name}
                   onChange={handleChange}
                   name='name'
                 />
@@ -67,7 +73,7 @@ const Profile = ({ onUserInfoChange }) => {
                 <input
                   className='profile__input'
                   type='email'
-                  placeholder={values.email}
+                  value={values.email ?? userInfo.email}
                   onChange={handleChange}
                   name='email'
                 />
@@ -92,7 +98,7 @@ const Profile = ({ onUserInfoChange }) => {
                 className='profile__button'
                 onClick={() => {
                   localStorage.clear();
-                  navigate('/signin');
+                  navigate('/');
                 }}
               >
                 Выйти из аккаунта
@@ -106,9 +112,9 @@ const Profile = ({ onUserInfoChange }) => {
                 className='profile__submit'
                 disabled={
                   !isValid ||
-                  !values.name ||
-                  !values.email ||
-                  (values.name == userInfo.name && userInfo.email == values.email)
+                  (!values.name && !values.email) ||
+                  (values.name == userInfo.name && userInfo.email == values.email) ||
+                  requestPending
                 }
               >
                 Сохранить

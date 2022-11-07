@@ -4,17 +4,25 @@ import MoviesCardList from '../../components/MoviesCardList';
 import SearchForm from '../../components/SearchForm';
 import Preloader from '../../components/Preloader';
 import '../Movies/Movies.scss';
+import { useEffect } from 'react';
 
 const SavedMovies = ({
   cards,
   isLoading,
   checked,
   inputValue,
+  onCleanUp,
   onInputChange,
   onCheckboxSwitch,
   onFormSubmit,
   onLike,
 }) => {
+  useEffect(() => {
+    return () => {
+      onCleanUp();
+    };
+  }, []);
+
   return (
     <>
       <Header isLoggedIn={true} />
@@ -24,6 +32,8 @@ const SavedMovies = ({
         onSubmit={onFormSubmit}
         inputValue={inputValue}
         onInputChange={onInputChange}
+        isLoading={isLoading}
+        addClasses='saved-films'
       />
       {isLoading ? (
         <Preloader />

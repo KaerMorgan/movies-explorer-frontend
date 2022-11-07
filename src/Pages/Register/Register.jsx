@@ -9,16 +9,18 @@ import '../Login/Login.scss';
 const Register = ({ onLogin }) => {
   const [popupErrorMessage, setPopupErrorMessage] = useState('');
   const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormValidation();
+  const [requestPending, setRequestPending] = useState(false);
+
   const navigate = useNavigate();
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
+    setRequestPending(true);
     try {
-      const user = await register(values);
-      const token = await login(values.email, values.password);
+      await register(values);
+      const token = await login({ email: values.email, password: values.password });
 
       localStorage.setItem('token', token.token);
-      localStorage.setItem('isLogged', true);
       setValues({});
       setIsValid(false);
       await onLogin();
@@ -35,6 +37,7 @@ const Register = ({ onLogin }) => {
       }
       console.log(error);
     }
+    setRequestPending(false);
   };
 
   const onPopupClose = () => {
@@ -44,7 +47,14 @@ const Register = ({ onLogin }) => {
   return (
     <main className='register'>
       <form className='register__form' onSubmit={formSubmitHandler}>
-        <img src={logo} alt='Логотип' className='register__logo' />
+        <img
+          src={logo}
+          alt='Логотип'
+          className='register__logo'
+          onClick={() => {
+            navigate('/');
+          }}
+        />
         <h1 className='register__title'>Добро пожаловать!</h1>
         <label className='register__input-label'>
           <p className='register__input-caption'>Имя</p>
@@ -52,6 +62,7 @@ const Register = ({ onLogin }) => {
             type='text'
             minLength='2'
             maxLength='30'
+            title='Может содержать только латиницу, кириллицу, пробел или дефис'
             className='register__input'
             onChange={handleChange}
             name='name'
@@ -59,7 +70,13 @@ const Register = ({ onLogin }) => {
         </label>
         <label className='register__input-label'>
           <p className='register__input-caption'>E-mail</p>
-          <input type='email' className='register__input' onChange={handleChange} name='email' />
+          <input
+            type='email'
+            className='register__input'
+            onChange={handleChange}
+            name='email'
+            pattern='/ ^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$ /'
+          />
         </label>
         <label className='register__input-label'>
           <p className='register__input-caption'>Пароль</p>
@@ -77,7 +94,9 @@ const Register = ({ onLogin }) => {
           <button
             type='submit'
             className='register__submit'
-            disabled={!isValid || !values.name || !values.email || !values.password}
+            disabled={
+              !isValid || !values.name || !values.email || !values.password || requestPending
+            }
           >
             Зарегистрироваться
           </button>

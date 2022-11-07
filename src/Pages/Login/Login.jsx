@@ -8,7 +8,9 @@ import './Login.scss';
 
 const Login = ({ onLogin }) => {
   const [popupErrorMessage, setPopupErrorMessage] = useState('');
+  const [requestPending, setRequestPending] = useState(false);
   const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormValidation();
+
   const navigate = useNavigate();
 
   const onPopupClose = () => {
@@ -17,11 +19,11 @@ const Login = ({ onLogin }) => {
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
+    setRequestPending(true);
     try {
       const token = await login(values);
 
       localStorage.setItem('token', token.token);
-      localStorage.setItem('isLogged', true);
       setValues({});
       setIsValid(false);
       await onLogin();
@@ -38,12 +40,20 @@ const Login = ({ onLogin }) => {
       }
       console.log(error);
     }
+    setRequestPending(false);
   };
 
   return (
     <main className='login'>
       <form className='login__form' onSubmit={formSubmitHandler}>
-        <img src={logo} alt='Логотип' className='login__logo' />
+        <img
+          src={logo}
+          alt='Логотип'
+          className='login__logo'
+          onClick={() => {
+            navigate('/');
+          }}
+        />
         <h1 className='login__title'>Рады видеть!</h1>
         <label className='login__input-label'>
           <p className='login__input-caption'>E-mail</p>
@@ -58,7 +68,7 @@ const Login = ({ onLogin }) => {
           <button
             type='submit'
             className='login__submit'
-            disabled={!isValid || !values.email || !values.password}
+            disabled={!isValid || !values.email || !values.password || requestPending}
           >
             Войти
           </button>

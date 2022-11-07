@@ -1,4 +1,4 @@
-const BASE_URL = `${window.location.protocol}//api.movies-explorer.nomoredomains.sbs`;
+import { BASE_URL } from './constants';
 
 const checkErorr = (res) => {
   if (res.ok) {
