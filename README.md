@@ -26,4 +26,4 @@ https://github.com/KaerMorgan/movies-explorer-frontend/pull/2
 
 ## Ссылка на фронтенд
 
-http://morgankatarn.nomoredomains.sbs
+http://morgankatarn.nomoredomains.icu
