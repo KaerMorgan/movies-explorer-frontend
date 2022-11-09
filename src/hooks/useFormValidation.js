@@ -13,7 +13,10 @@ export function useFormValidation() {
 
     setValues({ ...values, [name]: value });
     setErrors({ ...errors, [name]: event.target.validationMessage });
-    if (!isEmail(event.target.value)) {
+    if (!value) {
+      setErrors({ ...errors, [name]: 'Введите значение.' });
+    }
+    if (name === 'email' && !isEmail(value)) {
       setErrors({ ...errors, email: 'Некорректная почта.' });
     }
     setIsValid(event.target.closest('form').checkValidity());

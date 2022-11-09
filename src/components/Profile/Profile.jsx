@@ -53,7 +53,9 @@ const Profile = ({ onUserInfoChange, onLogout }) => {
 
   useEffect(() => {
     setValues({ name: userInfo.name, email: userInfo.email });
-  }, []);
+  }, [userInfo]);
+  console.log(values.name, userInfo.name, values.email, userInfo.email);
+  console.log(errors);
 
   return (
     <>
