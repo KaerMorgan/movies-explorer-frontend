@@ -35,7 +35,7 @@ const Register = ({ onLogin }) => {
       } else {
         setPopupErrorMessage('При регистрации пользователя произошла ошибка.');
       }
-      console.log(error);
+      console.log('Ошибка в блоке catch регистрации: ', error);
     }
     setRequestPending(false);
   };
@@ -95,7 +95,14 @@ const Register = ({ onLogin }) => {
             type='submit'
             className='register__submit'
             disabled={
-              !isValid || !values.name || !values.email || !values.password || requestPending
+              !isValid ||
+              !values.name ||
+              !values.email ||
+              !values.password ||
+              requestPending ||
+              errors.name ||
+              errors.email ||
+              errors.password
             }
           >
             Зарегистрироваться

@@ -11,6 +11,7 @@ import Register from '../Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import ProtectedRoute from '../../components/ProtectedRoute';
 import { getSavedMovies, getUserInfo, removeMovie, saveMovie } from '../../utils/MainApi';
+import { SHORT_FILM_DURATION } from '../../utils/constants';
 
 const App = () => {
   const token = localStorage.getItem('token');
@@ -33,7 +34,7 @@ const App = () => {
   const [searchSavedFilmValue, setSearchSavedFilmValue] = useState('');
 
   const [shortFilmsChecked, setShortFilmsChecked] = useState(
-    localStorage.getItem('filmsCheckbox') == 'true' ? true : false,
+    localStorage.getItem('filmsCheckbox') === 'true' ? true : false,
   );
   const [shortSavedFilmsChecked, setShortSavedFilmsChecked] = useState(
     localStorage.getItem('savedFilmsCheckbox') == 'true' ? true : false,
@@ -50,12 +51,12 @@ const App = () => {
   const switchFilmsType = (films, checkState) => {
     if (checkState) {
       const shortFilms = films.filter((item) => {
-        return item.duration < 40;
+        return item.duration < SHORT_FILM_DURATION;
       });
       return shortFilms;
     } else {
       const featureFilms = films.filter((item) => {
-        return item.duration > 40;
+        return item.duration > SHORT_FILM_DURATION;
       });
       return featureFilms;
     }
@@ -86,6 +87,19 @@ const App = () => {
     }
   };
 
+  const onLogout = () => {
+    localStorage.clear();
+    setAllSavedFilms([]);
+    setFilteredSavedFilmsList([]);
+    setFilteredFilmsList([]);
+    setSearchFilmValue('');
+    setSearchSavedFilmValue('');
+    setShortFilmsChecked(false);
+    setShortSavedFilmsChecked(false);
+    setIsLoading(false);
+    navigate('/');
+  };
+
   const onInputChange = (target) => {
     if (target.classList.contains('saved-films')) {
       setSearchSavedFilmValue(target.value);
@@ -98,9 +112,24 @@ const App = () => {
     if (target.classList.contains('saved-films')) {
       localStorage.setItem('savedFilmsCheckbox', !shortSavedFilmsChecked);
       setShortSavedFilmsChecked(!shortSavedFilmsChecked);
+      if (searchSavedFilmValue) {
+        const filteredSavedFilms = filterFilms(allSavedFilms, searchSavedFilmValue);
+        const switchedSavedFilms = switchFilmsType(filteredSavedFilms, !shortSavedFilmsChecked);
+        setFilteredSavedFilmsList(switchedSavedFilms);
+      } else {
+        const switchedSavedFilms = switchFilmsType(allSavedFilms, !shortSavedFilmsChecked);
+        setFilteredSavedFilmsList(switchedSavedFilms);
+      }
     } else {
       localStorage.setItem('filmsCheckbox', !shortFilmsChecked);
       setShortFilmsChecked(!shortFilmsChecked);
+
+      if (allFilms.length > 0 && searchFilmValue) {
+        const filteredFilms = filterFilms(allFilms, searchFilmValue);
+        const switchedFilms = switchFilmsType(filteredFilms, !shortFilmsChecked);
+        setFilteredFilmsList(switchedFilms);
+        localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
+      }
     }
   };
 
@@ -203,35 +232,7 @@ const App = () => {
         console.log('Ошибка при запросе сохранённых фильмов', error);
       }
     })();
-    return () => {
-      setAllSavedFilms([]);
-      setFilteredSavedFilmsList([]);
-      setFilteredFilmsList([]);
-      // setSearchFilmValue('');
-      setSearchSavedFilmValue('');
-      setShortFilmsChecked(false);
-      setShortSavedFilmsChecked(false);
-      setIsLoading(false);
-    };
   }, [token]);
-
-  // фильтрация фильмов при каждом переключении чекбокса
-  useLayoutEffect(() => {
-    if (allFilms.length > 0) {
-      const filteredFilms = filterFilms(allFilms, searchFilmValue);
-      const switchedFilms = switchFilmsType(filteredFilms, shortFilmsChecked);
-      setFilteredFilmsList(switchedFilms);
-      localStorage.setItem('filteredFilms', JSON.stringify(switchedFilms));
-    }
-  }, [shortFilmsChecked]);
-
-  useLayoutEffect(() => {
-    const filteredSavedFilms = filterFilms(allSavedFilms, searchSavedFilmValue);
-
-    const switchedSavedFilms = switchFilmsType(filteredSavedFilms, shortSavedFilmsChecked);
-
-    setFilteredSavedFilmsList(switchedSavedFilms);
-  }, [shortSavedFilmsChecked]);
 
   return (
     <UserContext.Provider value={userInfo}>
@@ -276,7 +277,7 @@ const App = () => {
           path='/profile'
           element={
             <ProtectedRoute>
-              <Profile onUserInfoChange={onUserInfoChange} />
+              <Profile onUserInfoChange={onUserInfoChange} onLogout={onLogout} />
             </ProtectedRoute>
           }
         />

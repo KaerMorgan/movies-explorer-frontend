@@ -15,7 +15,7 @@ export const register = ({ name, email, password }) => {
     },
     body: JSON.stringify({
       name: name,
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     }),
   }).then(checkErorr);
@@ -28,7 +28,7 @@ export const login = ({ email, password }) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     }),
   }).then(checkErorr);
@@ -53,7 +53,7 @@ export const changeUserInfo = ({ name, email }) => {
     },
     body: JSON.stringify({
       name: name,
-      email: email,
+      email: email.toLowerCase(),
     }),
   }).then(checkErorr);
 };

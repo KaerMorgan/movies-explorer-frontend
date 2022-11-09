@@ -45,7 +45,6 @@ const SearchForm = ({
           className={cn('search-form__switch', addClasses, {
             'search-form__switch_checked': checked,
           })}
-          checked={checked}
           id='toggle'
           onChange={(e) => {
             onCheckboxSwitch(e.target);

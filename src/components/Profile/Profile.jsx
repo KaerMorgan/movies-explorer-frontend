@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { useFormValidation } from '../../hooks/useFormValidation';
 import { changeUserInfo } from '../../utils/MainApi';
@@ -7,15 +6,14 @@ import Header from '../Header';
 import Popup from '../Popup';
 import './Profile.scss';
 
-const Profile = ({ onUserInfoChange }) => {
+const Profile = ({ onUserInfoChange, onLogout }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
   const [requestPending, setRequestPending] = useState(false);
 
   const userInfo = useContext(UserContext);
 
-  const { values, handleChange, errors, isValid, setIsValid } = useFormValidation();
-  const navigate = useNavigate();
+  const { values, setValues, handleChange, errors, isValid, setIsValid } = useFormValidation();
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
@@ -44,6 +42,18 @@ const Profile = ({ onUserInfoChange }) => {
   const onPopupClose = () => {
     setPopupMessage('');
   };
+
+  const errorCases =
+    !isValid ||
+    (values.name === userInfo.name && values.email.toLowerCase() === userInfo.email) ||
+    (!values.name && !values.email) ||
+    errors.name ||
+    errors.email ||
+    requestPending;
+
+  useEffect(() => {
+    setValues({ name: userInfo.name, email: userInfo.email });
+  }, []);
 
   return (
     <>
@@ -93,30 +103,13 @@ const Profile = ({ onUserInfoChange }) => {
               >
                 Редактировать
               </button>
-              <button
-                type='button'
-                className='profile__button'
-                onClick={() => {
-                  localStorage.clear();
-                  navigate('/');
-                }}
-              >
+              <button type='button' className='profile__button' onClick={onLogout}>
                 Выйти из аккаунта
               </button>
             </div>
           ) : (
             <>
-              {errors && <span className='register__error'>{errors.name || errors.email}</span>}
-              <button
-                type='submit'
-                className='profile__submit'
-                disabled={
-                  !isValid ||
-                  (!values.name && !values.email) ||
-                  (values.name == userInfo.name && userInfo.email == values.email) ||
-                  requestPending
-                }
-              >
+              <button type='submit' className='profile__submit' disabled={errorCases}>
                 Сохранить
               </button>
             </>

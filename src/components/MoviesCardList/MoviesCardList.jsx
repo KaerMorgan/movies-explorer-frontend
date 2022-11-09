@@ -1,5 +1,15 @@
 import { useEffect, useState } from 'react';
 import MoviesCard from '../../components/MoviesCard';
+import {
+  LAPTOP_ADD_CARDS_NUMBER,
+  LAPTOP_BREAKPOINT,
+  LAPTOP_CARDS_ARRAY_LENGTH,
+  MOBILE_ADD_CARDS_NUMBER,
+  MOBILE_CARDS_ARRAY_LENGTH,
+  TABLET_ADD_CARDS_NUMBER,
+  TABLET_BREAKPOINT,
+  TABLET_CARDS_ARRAY_LENGTH,
+} from '../../utils/constants';
 import './MoviesCardList.scss';
 
 const MoviesCardList = ({ cards, onLike }) => {
@@ -13,24 +23,24 @@ const MoviesCardList = ({ cards, onLike }) => {
   };
 
   const handleMoreClick = () => {
-    if (width >= 1280) {
-      setEndofArray(endofArray + 3);
-    } else if (width >= 768) {
-      setEndofArray(endofArray + 2);
+    if (width >= LAPTOP_BREAKPOINT) {
+      setEndofArray(endofArray + LAPTOP_ADD_CARDS_NUMBER);
+    } else if (width >= TABLET_BREAKPOINT) {
+      setEndofArray(endofArray + TABLET_ADD_CARDS_NUMBER);
     } else {
-      setEndofArray(endofArray + 2);
+      setEndofArray(endofArray + MOBILE_ADD_CARDS_NUMBER);
     }
   };
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
     setWidth(window.innerWidth);
-    if (width >= 1280) {
-      setEndofArray(11);
-    } else if (width >= 768) {
-      setEndofArray(7);
+    if (width >= LAPTOP_BREAKPOINT) {
+      setEndofArray(LAPTOP_CARDS_ARRAY_LENGTH);
+    } else if (width >= TABLET_BREAKPOINT) {
+      setEndofArray(TABLET_CARDS_ARRAY_LENGTH);
     } else {
-      setEndofArray(4);
+      setEndofArray(MOBILE_CARDS_ARRAY_LENGTH);
     }
     return () => {
       window.removeEventListener('resize', handleResize);

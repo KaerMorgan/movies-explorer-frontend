@@ -68,7 +68,14 @@ const Login = ({ onLogin }) => {
           <button
             type='submit'
             className='login__submit'
-            disabled={!isValid || !values.email || !values.password || requestPending}
+            disabled={
+              !isValid ||
+              !values.email ||
+              !values.password ||
+              requestPending ||
+              errors.password ||
+              errors.email
+            }
           >
             Войти
           </button>
