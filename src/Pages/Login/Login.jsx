@@ -1,31 +1,81 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useFormValidation } from '../../hooks/useFormValidation';
+import { login } from '../../utils/MainApi';
+import Popup from '../../components/Popup';
 import logo from '../../images/logo.png';
 import './Login.scss';
 
-const Login = () => {
-  const error = false;
+const Login = ({ onLogin }) => {
+  const [popupErrorMessage, setPopupErrorMessage] = useState('');
+  const [requestPending, setRequestPending] = useState(false);
+  const { values, handleChange, errors, isValid, setValues, setIsValid } = useFormValidation();
+
+  const navigate = useNavigate();
+
+  const onPopupClose = () => {
+    setPopupErrorMessage('');
+  };
+
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+    setRequestPending(true);
+    try {
+      const token = await login(values);
+
+      localStorage.setItem('token', token.token);
+      setValues({});
+      setIsValid(false);
+      await onLogin();
+      navigate('/movies');
+    } catch (error) {
+      setIsValid(false);
+
+      if (error.indexOf('401') != -1) {
+        setPopupErrorMessage('Вы ввели неправильный логин или пароль.');
+      } else if (error.indexOf('500') != -1) {
+        setPopupErrorMessage('На сервере произошла ошибка.');
+      } else {
+        setPopupErrorMessage('При регистрации пользователя произошла ошибка.');
+      }
+      console.log(error);
+    }
+    setRequestPending(false);
+  };
 
   return (
     <main className='login'>
-      <form className='login__form'>
-        <img src={logo} alt='Логотип' className='login__logo' />
+      <form className='login__form' onSubmit={formSubmitHandler}>
+        <img
+          src={logo}
+          alt='Логотип'
+          className='login__logo'
+          onClick={() => {
+            navigate('/');
+          }}
+        />
         <h1 className='login__title'>Рады видеть!</h1>
         <label className='login__input-label'>
           <p className='login__input-caption'>E-mail</p>
-          <input type='text' className='login__input' />
+          <input type='email' className='login__input' onChange={handleChange} name='email' />
         </label>
         <label className='login__input-label'>
           <p className='login__input-caption'>Пароль</p>
-          <input type='text' className='login__input' />
+          <input type='password' className='login__input' onChange={handleChange} name='password' />
         </label>
-        {error && <span className='login__error'>Что-то пошло не так...</span>}
+        {errors && <span className='login__error'>{errors.email || errors.password}</span>}
         <div className='login__bottom-group'>
           <button
             type='submit'
             className='login__submit'
-            onClick={(e) => {
-              e.preventDefault();
-            }}
+            disabled={
+              !isValid ||
+              !values.email ||
+              !values.password ||
+              requestPending ||
+              errors.password ||
+              errors.email
+            }
           >
             Войти
           </button>
@@ -37,6 +87,7 @@ const Login = () => {
           </p>
         </div>
       </form>
+      <Popup ErrorMessage={popupErrorMessage} onClose={onPopupClose} />
     </main>
   );
 };

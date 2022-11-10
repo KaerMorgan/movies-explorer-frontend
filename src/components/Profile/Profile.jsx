@@ -1,39 +1,96 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
+import { useFormValidation } from '../../hooks/useFormValidation';
+import { changeUserInfo } from '../../utils/MainApi';
 import Header from '../Header';
+import Popup from '../Popup';
 import './Profile.scss';
 
-const Profile = () => {
+const Profile = ({ onUserInfoChange, onLogout }) => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [popupMessage, setPopupMessage] = useState('');
+  const [requestPending, setRequestPending] = useState(false);
 
-  const navigate = useNavigate();
+  const userInfo = useContext(UserContext);
 
-  const [name, setName] = useState('Данил');
-  const [email, setEmail] = useState('subdante@gmail.com');
-  const errors = false;
+  const { values, setValues, handleChange, errors, isValid, setIsValid } = useFormValidation();
+
+  const formSubmitHandler = async (e) => {
+    e.preventDefault();
+    setRequestPending(true);
+    try {
+      const changedInfo = await changeUserInfo({
+        name: values.name ?? userInfo.name,
+        email: values.email ?? userInfo.email,
+      });
+      setIsEditMode(false);
+      onUserInfoChange(changedInfo);
+      setPopupMessage('Данные успешно изменены.');
+    } catch (error) {
+      setIsValid(false);
+      if (error.indexOf('500') != -1) {
+        setPopupMessage('Пользователь с таким email уже существует.');
+      } else if (error.indexOf('409') != -1) {
+        setPopupMessage('На сервере произошла ошибка.');
+      } else {
+        setPopupMessage('При обновлении профиля произошла ошибка.');
+      }
+    }
+    setRequestPending(false);
+  };
+
+  const onPopupClose = () => {
+    setPopupMessage('');
+  };
+
+  const errorCases =
+    !isValid ||
+    (values.name === userInfo.name && values.email.toLowerCase() === userInfo.email) ||
+    (!values.name && !values.email) ||
+    errors.name ||
+    errors.email ||
+    requestPending;
+
+  useEffect(() => {
+    setValues({ name: userInfo.name, email: userInfo.email });
+  }, [userInfo]);
+  console.log(values.name, userInfo.name, values.email, userInfo.email);
+  console.log(errors);
 
   return (
     <>
       <Header isLoggedIn={true} />
       <main className='profile'>
-        <form className='profile__form'>
-          <h1 className='profile__title'>{`Привет, ${name}!`}</h1>
+        <form className='profile__form' onSubmit={formSubmitHandler}>
+          <h1 className='profile__title'>{`Привет, ${userInfo.name}!`}</h1>
           <div className='profile__info'>
             <label className='profile__input-group'>
               <p className='profile__name'>Имя</p>
               {isEditMode ? (
-                <input className='profile__input' value={name} />
+                <input
+                  className='profile__input'
+                  type='text'
+                  value={values.name ?? userInfo.name}
+                  onChange={handleChange}
+                  name='name'
+                />
               ) : (
-                <div className='profile__input'>{name}</div>
+                <div className='profile__input'>{userInfo.name}</div>
               )}
             </label>
             <hr className='profile__line-break' />
             <label className='profile__input-group'>
               <p className='profile__email'>E-mail</p>
               {isEditMode ? (
-                <input className='profile__input' value={email} />
+                <input
+                  className='profile__input'
+                  type='email'
+                  value={values.email ?? userInfo.email}
+                  onChange={handleChange}
+                  name='email'
+                />
               ) : (
-                <div className='profile__input'>{email}</div>
+                <div className='profile__input'>{userInfo.email}</div>
               )}
             </label>
           </div>
@@ -48,33 +105,19 @@ const Profile = () => {
               >
                 Редактировать
               </button>
-              <button
-                type='button'
-                className='profile__button'
-                onClick={() => {
-                  navigate('/signin');
-                }}
-              >
+              <button type='button' className='profile__button' onClick={onLogout}>
                 Выйти из аккаунта
               </button>
             </div>
           ) : (
             <>
-              {errors && <p className='profile__error'>При обновлении профиля произошла ошибка.</p>}
-              <button
-                type='submit'
-                className='profile__submit'
-                disabled={errors}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setIsEditMode(false);
-                }}
-              >
+              <button type='submit' className='profile__submit' disabled={errorCases}>
                 Сохранить
               </button>
             </>
           )}
         </form>
+        <Popup ErrorMessage={popupMessage} onClose={onPopupClose} />
       </main>
     </>
   );

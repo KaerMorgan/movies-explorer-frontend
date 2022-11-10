@@ -1,9 +1,13 @@
 @import "variables";
 
 .footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   font-family: var(--primary-font);
   background-color: #202020;
   padding: 79px var(--width-padding) 20px;
+  margin-top: auto;
 
   &__hint {
     font-style: normal;
